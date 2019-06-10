@@ -13,11 +13,9 @@ public class Phone {
     @ManyToOne
     @JoinColumns({
             @JoinColumn(
-                    name = "company_id",
-                    referencedColumnName = "company_id"),
+                    name = "company_id"),
             @JoinColumn(
-                    name = "employee_number",
-                    referencedColumnName = "employee_number")
+                    name = "employee_number")
     })
     private Employee employee;
 
@@ -35,6 +33,14 @@ public class Phone {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    @Override
+    public String toString() {
+        return "Phone{" +
+                "number='" + number + '\'' +
+                ", employee=" + employee.getId().getCompanyId()+" "+ employee.getId().getEmployeeNumber()+ " "+ employee.getName() +
+                '}';
     }
 }
 

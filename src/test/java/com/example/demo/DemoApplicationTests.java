@@ -26,7 +26,7 @@ public class DemoApplicationTests {
         employee.setName("Vlad Mihalcea");
         Phone phone = new Phone();
         phone.setEmployee(employee);
-        phone.setNumber("000");
+        phone.setNumber("0001");
         phoneDao.save(phone);
     }
 
@@ -34,9 +34,10 @@ public class DemoApplicationTests {
     public void test2() {
         List<Phone> phoneList = phoneDao.findAll();
         System.out.println(phoneList.size());
-        System.out.println(phoneList.get(0).getNumber());
-        System.out.println(phoneList.get(0).getEmployee().getId());
-        System.out.println(phoneList.get(0).getEmployee().getName());
+
+        phoneList.forEach(phone -> System.out.println(phone.toString()));
+
+
     }
 
     @Test
@@ -45,6 +46,19 @@ public class DemoApplicationTests {
         employee.setId(new EmployeeId(1L, 100L));
         employee.setName("Vlad Mihalcea");
         employeeDao.save(employee);
+    }
+
+    @Test
+    public void test4() {
+        List<Employee> employees = employeeDao.findAll();
+        System.out.println(employees.size());
+        employees.forEach(employee -> {
+            System.out.println(employee.getName());
+            System.out.println("employee.phone.size: "+employee.getPhoneList().size());
+            employee.getPhoneList().forEach(phone -> {
+                System.out.println(phone.toString());
+            });
+        });
     }
 
 }

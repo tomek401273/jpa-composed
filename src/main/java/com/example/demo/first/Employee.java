@@ -1,8 +1,7 @@
 package com.example.demo.first;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "Employee")
 @Table(name = "employee")
@@ -27,5 +26,16 @@ public class Employee {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @OneToMany(targetEntity = Phone.class, mappedBy = "employee", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Phone> phoneList;
+
+    public List<Phone> getPhoneList() {
+        return phoneList;
+    }
+
+    public void setPhoneList(List<Phone> phoneList) {
+        this.phoneList = phoneList;
     }
 }
